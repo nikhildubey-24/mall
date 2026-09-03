@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState, useCallback } from "react";
-import { ImagePlus, Pencil, Trash2 } from "lucide-react";
+import { Plus, Pencil, Trash2 } from "lucide-react";
 import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
@@ -87,7 +87,6 @@ export default function PortfolioManagementPage() {
   const [form, setForm] = useState<FormState>(EMPTY_FORM);
   const [customCategory, setCustomCategory] = useState("");
   const [useCustomCategory, setUseCustomCategory] = useState(false);
-  const [uploading, setUploading] = useState(false);
   const [saving, setSaving] = useState(false);
 
   const fetchItems = useCallback(async () => {
@@ -134,30 +133,6 @@ export default function PortfolioManagementPage() {
       status: item.status,
     });
     setDialogOpen(true);
-  }
-
-  async function handleFileUpload(file: File): Promise<string | null> {
-    setUploading(true);
-    try {
-      const formData = new FormData();
-      formData.append("file", file);
-      const res = await fetch("/api/upload?folder=portfolio", {
-        method: "POST",
-        body: formData,
-      });
-      if (!res.ok) {
-        const data = await res.json();
-        toast.error(data.error || "Upload failed");
-        return null;
-      }
-      const data = await res.json();
-      return data.url;
-    } catch {
-      toast.error("Upload failed");
-      return null;
-    } finally {
-      setUploading(false);
-    }
   }
 
   const effectiveCategory = useCustomCategory ? customCategory : form.category;
@@ -238,7 +213,7 @@ export default function PortfolioManagementPage() {
           </p>
         </div>
         <Button size="sm" onClick={openAdd}>
-          <ImagePlus className="mr-2 size-4" />
+          <Plus className="mr-2 size-4" />
           Add Item
         </Button>
       </div>
@@ -345,7 +320,6 @@ export default function PortfolioManagementPage() {
                         </AlertDialogTitle>
                         <AlertDialogDescription>
                           This will permanently delete &ldquo;{item.name}&rdquo;
-                          and its uploaded image.
                         </AlertDialogDescription>
                       </AlertDialogHeader>
                       <AlertDialogFooter>
@@ -375,7 +349,7 @@ export default function PortfolioManagementPage() {
             <DialogDescription>
               {editing
                 ? "Update the item details below."
-                : "Fill in the details and optionally upload an image."}
+                : "Fill in the details and optionally provide an image URL."}
             </DialogDescription>
           </DialogHeader>
           <form onSubmit={handleSubmit} className="flex flex-col gap-4">
@@ -478,22 +452,15 @@ export default function PortfolioManagementPage() {
             </div>
 
             <div className="flex flex-col gap-2">
-              <Label htmlFor="image">Image</Label>
+              <Label htmlFor="image">Image URL</Label>
               <Input
                 id="image"
-                type="file"
-                accept="image/jpeg,image/png,image/webp"
-                onChange={async (e) => {
-                  const file = e.target.files?.[0];
-                  if (!file) return;
-                  const url = await handleFileUpload(file);
-                  if (url) setForm((f) => ({ ...f, imageUrl: url }));
-                }}
-                disabled={uploading}
+                value={form.imageUrl}
+                onChange={(e) =>
+                  setForm((f) => ({ ...f, imageUrl: e.target.value }))
+                }
+                placeholder="https://example.com/image.jpg"
               />
-              {uploading && (
-                <p className="text-xs text-muted-foreground">Uploading...</p>
-              )}
               {form.imageUrl && (
                 <div className="mt-1 relative w-32 h-20 rounded overflow-hidden bg-muted">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -541,7 +508,6 @@ export default function PortfolioManagementPage() {
                 type="submit"
                 disabled={
                   saving ||
-                  uploading ||
                   !form.name.trim() ||
                   !form.location.trim() ||
                   (useCustomCategory

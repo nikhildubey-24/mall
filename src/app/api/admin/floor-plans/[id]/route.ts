@@ -1,6 +1,4 @@
 import { NextResponse } from "next/server";
-import { unlinkSync } from "fs";
-import { join } from "path";
 
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
@@ -118,16 +116,6 @@ export async function DELETE(
     }
 
     await prisma.floorPlan.delete({ where: { id } });
-
-    // Best-effort file cleanup
-    if (floorPlan.image && floorPlan.image.startsWith("/uploads/floor-plans/")) {
-      try {
-        const filePath = join(process.cwd(), "public", floorPlan.image);
-        unlinkSync(filePath);
-      } catch {
-        // File may not exist or already deleted — ignore
-      }
-    }
 
     return new NextResponse(null, { status: 204 });
   } catch (error: unknown) {

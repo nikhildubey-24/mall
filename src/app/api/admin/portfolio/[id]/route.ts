@@ -1,6 +1,4 @@
 import { NextResponse } from "next/server";
-import { unlinkSync } from "fs";
-import { join } from "path";
 
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
@@ -164,15 +162,6 @@ export async function DELETE(
     }
 
     await prisma.portfolioItem.delete({ where: { id } });
-
-    if (item.imageUrl && item.imageUrl.startsWith("/uploads/portfolio/")) {
-      try {
-        const filePath = join(process.cwd(), "public", item.imageUrl);
-        unlinkSync(filePath);
-      } catch {
-        // File may not exist — ignore
-      }
-    }
 
     return new NextResponse(null, { status: 204 });
   } catch (error: unknown) {

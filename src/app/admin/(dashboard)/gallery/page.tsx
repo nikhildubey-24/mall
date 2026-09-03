@@ -64,7 +64,6 @@ export default function GalleryManagementPage() {
   const [dialogOpen, setDialogOpen] = useState(false);
   const [editing, setEditing] = useState<GalleryImage | null>(null);
   const [form, setForm] = useState(EMPTY_FORM);
-  const [uploading, setUploading] = useState(false);
   const [saving, setSaving] = useState(false);
   const dragIndex = useRef<number | null>(null);
   const [dragOverIndex, setDragOverIndex] = useState<number | null>(null);
@@ -101,30 +100,6 @@ export default function GalleryManagementPage() {
       imageUrl: img.imageUrl,
     });
     setDialogOpen(true);
-  }
-
-  async function handleFileUpload(file: File): Promise<string | null> {
-    setUploading(true);
-    try {
-      const formData = new FormData();
-      formData.append("file", file);
-      const res = await fetch("/api/upload?folder=gallery", {
-        method: "POST",
-        body: formData,
-      });
-      if (!res.ok) {
-        const data = await res.json();
-        toast.error(data.error || "Upload failed");
-        return null;
-      }
-      const data = await res.json();
-      return data.url;
-    } catch {
-      toast.error("Upload failed");
-      return null;
-    } finally {
-      setUploading(false);
-    }
   }
 
   async function handleSubmit(e: React.FormEvent) {
@@ -345,7 +320,7 @@ export default function GalleryManagementPage() {
             <DialogDescription>
               {editing
                 ? "Update the image details below."
-                : "Fill in the details and upload an image for the gallery."}
+                : "Fill in the details and provide an image URL for the gallery."}
             </DialogDescription>
           </DialogHeader>
           <form onSubmit={handleSubmit} className="flex flex-col gap-4">
@@ -389,20 +364,16 @@ export default function GalleryManagementPage() {
             </div>
             {!editing && (
               <div className="flex flex-col gap-2">
-                <Label htmlFor="image">Image *</Label>
+                <Label htmlFor="image">Image URL *</Label>
                 <Input
                   id="image"
-                  type="file"
-                  accept="image/jpeg,image/png,image/webp"
-                  onChange={async (e) => {
-                    const file = e.target.files?.[0];
-                    if (!file) return;
-                    const url = await handleFileUpload(file);
-                    if (url) setForm((f) => ({ ...f, imageUrl: url }));
-                  }}
-                  disabled={uploading}
+                  value={form.imageUrl}
+                  onChange={(e) =>
+                    setForm((f) => ({ ...f, imageUrl: e.target.value }))
+                  }
+                  placeholder="https://example.com/image.jpg"
+                  required
                 />
-                {uploading && <p className="text-xs text-muted-foreground">Uploading...</p>}
                 {form.imageUrl && (
                   <div className="mt-1 relative w-32 h-20 rounded overflow-hidden bg-muted">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -429,7 +400,7 @@ export default function GalleryManagementPage() {
               </div>
             )}
             <DialogFooter>
-              <Button type="submit" disabled={saving || uploading || !form.title || !form.altText || !form.category}>
+              <Button type="submit" disabled={saving || !form.title || !form.altText || !form.category}>
                 {saving ? "Saving..." : editing ? "Update" : "Create"}
               </Button>
             </DialogFooter>

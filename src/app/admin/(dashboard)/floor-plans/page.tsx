@@ -47,7 +47,6 @@ export default function FloorPlansPage() {
   const [dialogOpen, setDialogOpen] = useState(false);
   const [editing, setEditing] = useState<FloorPlan | null>(null);
   const [form, setForm] = useState(EMPTY_FORM);
-  const [uploading, setUploading] = useState(false);
   const [saving, setSaving] = useState(false);
 
   const fetchFloorPlans = useCallback(async () => {
@@ -81,27 +80,6 @@ export default function FloorPlansPage() {
       image: fp.image,
     });
     setDialogOpen(true);
-  }
-
-  async function handleFileUpload(file: File): Promise<string | null> {
-    setUploading(true);
-    try {
-      const formData = new FormData();
-      formData.append("file", file);
-      const res = await fetch("/api/upload", { method: "POST", body: formData });
-      if (!res.ok) {
-        const data = await res.json();
-        toast.error(data.error || "Upload failed");
-        return null;
-      }
-      const data = await res.json();
-      return data.url;
-    } catch {
-      toast.error("Upload failed");
-      return null;
-    } finally {
-      setUploading(false);
-    }
   }
 
   async function handleSubmit(e: React.FormEvent) {
@@ -210,7 +188,7 @@ export default function FloorPlansPage() {
                         <AlertDialogHeader>
                           <AlertDialogTitle>Delete floor plan?</AlertDialogTitle>
                           <AlertDialogDescription>
-                            This will permanently delete &ldquo;{fp.title}&rdquo; and its uploaded image.
+                            This will permanently delete &ldquo;{fp.title}&rdquo;.
                           </AlertDialogDescription>
                         </AlertDialogHeader>
                         <AlertDialogFooter>
@@ -245,7 +223,7 @@ export default function FloorPlansPage() {
             <DialogDescription>
               {editing
                 ? "Update the floor plan details below."
-                : "Fill in the details and upload an image for the new floor plan."}
+                : "Fill in the details and provide an image URL for the new floor plan."}
             </DialogDescription>
           </DialogHeader>
           <form onSubmit={handleSubmit} className="flex flex-col gap-4">
@@ -280,20 +258,14 @@ export default function FloorPlansPage() {
               />
             </div>
             <div className="flex flex-col gap-2">
-              <Label htmlFor="image">Image *</Label>
+              <Label htmlFor="image">Image URL *</Label>
               <Input
                 id="image"
-                type="file"
-                accept="image/jpeg,image/png,image/webp"
-                onChange={async (e) => {
-                  const file = e.target.files?.[0];
-                  if (!file) return;
-                  const url = await handleFileUpload(file);
-                  if (url) setForm((f) => ({ ...f, image: url }));
-                }}
-                disabled={uploading}
+                value={form.image}
+                onChange={(e) => setForm((f) => ({ ...f, image: e.target.value }))}
+                placeholder="https://example.com/floor-plan.jpg"
+                required
               />
-              {uploading && <p className="text-xs text-muted-foreground">Uploading...</p>}
               {form.image && (
                 <div className="mt-1 relative w-32 h-20 rounded overflow-hidden bg-muted">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -306,7 +278,7 @@ export default function FloorPlansPage() {
               )}
             </div>
             <DialogFooter>
-              <Button type="submit" disabled={saving || uploading || !form.image}>
+              <Button type="submit" disabled={saving || !form.image}>
                 {saving ? "Saving..." : editing ? "Update" : "Create"}
               </Button>
             </DialogFooter>
