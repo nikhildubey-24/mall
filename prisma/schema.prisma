@@ -1,0 +1,119 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model AdminUser {
+  id           String   @id @default(cuid())
+  name         String
+  email        String   @unique
+  passwordHash String   @map("password_hash")
+  role         String   @default("admin")
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+
+  @@map("admin_users")
+}
+
+model Project {
+  id          String   @id @default(cuid())
+  name        String
+  description String?  @db.Text
+  address     String
+  promoter    String
+  status      String   @default("active")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  rera        ReraRegistration?
+  floorPlans  FloorPlan[]
+
+  @@map("projects")
+}
+
+model ReraRegistration {
+  id                String   @id @default(cuid())
+  projectId         String   @unique @map("project_id")
+  registrationNumber String @map("registration_number")
+  registrationDate  DateTime @map("registration_date")
+  validUntil        DateTime @map("valid_until")
+  verificationUrl   String   @map("verification_url")
+  certificateFile   String?  @map("certificate_file")
+  createdAt         DateTime @default(now()) @map("created_at")
+  updatedAt         DateTime @updatedAt @map("updated_at")
+
+  project Project @relation(fields: [projectId], references: [id])
+
+  @@map("rera_registrations")
+}
+
+model FloorPlan {
+  id          String   @id @default(cuid())
+  projectId   String   @map("project_id")
+  floorName   String   @map("floor_name")
+  title       String
+  description String?  @db.Text
+  image       String
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  project Project @relation(fields: [projectId], references: [id])
+
+  @@map("floor_plans")
+}
+
+model PortfolioItem {
+  id          String   @id @default(cuid())
+  name        String
+  category    String
+  location    String
+  description String?  @db.Text
+  imageUrl    String?  @map("image_url")
+  websiteUrl  String?  @map("website_url")
+  status      String   @default("active")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  @@map("portfolio_items")
+}
+
+model GalleryImage {
+  id        String   @id @default(cuid())
+  category  String
+  title     String
+  imageUrl  String   @map("image_url")
+  altText   String   @map("alt_text")
+  sortOrder Int      @default(0) @map("sort_order")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@map("gallery_images")
+}
+
+model Enquiry {
+  id            String   @id @default(cuid())
+  name          String
+  phone         String
+  email         String?
+  interestedIn  String   @map("interested_in")
+  contactMethod String   @map("contact_method")
+  message       String?  @db.Text
+  status        String   @default("new")
+  adminNotes    String?  @db.Text @map("admin_notes")
+  createdAt     DateTime @default(now()) @map("created_at")
+  updatedAt     DateTime @updatedAt @map("updated_at")
+
+  @@map("enquiries")
+}
+
+model SiteSetting {
+  id        String   @id @default(cuid())
+  key       String   @unique
+  value     String?  @db.Text
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("site_settings")
+}
