@@ -2,9 +2,11 @@ import { MapPin } from "lucide-react";
 
 import { getSiteSettings } from "@/lib/settings";
 
+const MALL_COORDS = "22.0947208,82.1596756";
+
 const DEFAULT_EMBED_URL = `https://maps.google.com/maps?q=${encodeURIComponent(
-  "P.H.N. 33, Village Chantidih, Tehsil Bilaspur, Chhattisgarh"
-)}&t=m&z=15&output=embed&iwloc=near`;
+  MALL_COORDS
+)}&t=m&z=17&output=embed&iwloc=near`;
 
 export async function MapEmbed({
   title = "Map location",

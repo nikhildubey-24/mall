@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const BASE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL || "https://acropolisthemall.com";
+  process.env.NEXT_PUBLIC_SITE_URL || "https://acropolismall.info";
 
 export const baseMetadata: Partial<Metadata> = {
   title: {

@@ -10,24 +10,26 @@ export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
   title: "Location",
   description:
-    "Find Acropolis The Mall at P.H.N. 33, Village Chantidih, Tehsil Bilaspur, Chhattisgarh. Get directions and view the location on the map.",
+    "Find Acropolis The Mall at Near Ashok Nagar Chowk, Chatidih Road, Bilaspur, Chhattisgarh. Get directions and view the location on the map.",
   openGraph: {
     title: "Location | Acropolis The Mall, Bilaspur",
     description:
-      "Find Acropolis The Mall at P.H.N. 33, Village Chantidih, Tehsil Bilaspur, Chhattisgarh. Get directions and view the location on the map.",
+      "Find Acropolis The Mall at Near Ashok Nagar Chowk, Chatidih Road, Bilaspur, Chhattisgarh. Get directions and view the location on the map.",
     url: `${BASE_URL}/location`,
   },
 };
 
 const ADDRESS =
-  "P.H.N. 33, Village Chantidih, Tehsil Bilaspur, Chhattisgarh";
+  "Near Ashok Nagar Chowk, Chatidih Road, Bilaspur, Chhattisgarh";
+
+const MALL_COORDS = "22.0947208,82.1596756";
 
 const DEFAULT_EMBED_URL = `https://maps.google.com/maps?q=${encodeURIComponent(
-  ADDRESS
-)}&t=m&z=15&output=embed&iwloc=near`;
+  MALL_COORDS
+)}&t=m&z=17&output=embed&iwloc=near`;
 
 const DIRECTIONS_URL = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(
-  ADDRESS
+  MALL_COORDS
 )}`;
 
 export default async function LocationPage() {

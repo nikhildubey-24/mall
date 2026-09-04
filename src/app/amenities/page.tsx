@@ -10,6 +10,11 @@ import {
   Accessibility,
   Sun,
   ArrowRight,
+  ChefHat,
+  Clapperboard,
+  Dices,
+  PartyPopper,
+  ShoppingBasket,
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -19,11 +24,11 @@ import { BASE_URL } from "@/lib/seo";
 export const metadata: Metadata = {
   title: "Amenities & Features",
   description:
-    "Explore the amenities and features at Acropolis The Mall, Chantidih, Bilaspur — including entrance foyer, wide front road, basement access, recreational area, restaurant space, lifts, toilets and open terrace sitting.",
+    "Explore the amenities and features at Acropolis The Mall, Chantidih, Bilaspur — including rooftop restaurant, multiplex cinema, game zone, banquet hall, supermarket, entrance foyer, wide front road, basement access, recreational area, restaurant space, lifts, toilets and open terrace sitting.",
   openGraph: {
     title: "Amenities & Features | Acropolis The Mall, Bilaspur",
     description:
-      "Explore the amenities and features at Acropolis The Mall, Chantidih, Bilaspur — including entrance foyer, wide front road, basement access, recreational area, restaurant space, lifts, toilets and open terrace sitting.",
+      "Explore the amenities and features at Acropolis The Mall, Chantidih, Bilaspur — including rooftop restaurant, multiplex cinema, game zone, banquet hall, supermarket and more.",
     url: `${BASE_URL}/amenities`,
   },
 };
@@ -76,6 +81,36 @@ const amenities = [
     title: "Open Terrace Sitting",
     description:
       "An open terrace sitting area measuring 70' × 18' on the upper floors.",
+  },
+  {
+    icon: ChefHat,
+    title: "Rooftop Restaurant",
+    description:
+      "A rooftop dining experience with views over the surrounding area.",
+  },
+  {
+    icon: Clapperboard,
+    title: "Multiplex Cinema",
+    description:
+      "A multiplex cinema for immersive entertainment experiences.",
+  },
+  {
+    icon: Dices,
+    title: "Game Zone",
+    description:
+      "A dedicated game zone for arcade and recreational entertainment.",
+  },
+  {
+    icon: PartyPopper,
+    title: "Banquet Hall",
+    description:
+      "An elegant banquet hall for events, functions and celebrations.",
+  },
+  {
+    icon: ShoppingBasket,
+    title: "Super Market",
+    description:
+      "A modern supermarket for convenient everyday shopping.",
   },
 ];
 

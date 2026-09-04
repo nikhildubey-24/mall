@@ -13,21 +13,34 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Commercial Spaces | Acropolis The Mall, Bilaspur",
     description:
-      "Explore the commercial shop configurations at Acropolis The Mall, Chantidih, Bilaspur, Chhattisgarh, across the ground, first and second floors.",
-    url: `${BASE_URL}/spaces`,
+      "Explore the commercial shop configurations at Acropolis The Mall, Chantidih, Bilaspur, Chhattisgarh, across the ground, first and second floors.",    url: `${BASE_URL}/spaces`,
   },
 };
 
 const groundFloorDimensions = [
   "14'3\" × 38'0\"",
+  "14'3\" × 38'0\"",
+  "14'3\" × 38'0\"",
+  "44'3\" × 13'0\"",
+  "44'3\" × 13'0\"",
+  "44'3\" × 13'0\"",
   "44'3\" × 13'0\"",
   "37'0\" × 13'0\"",
+  "37'0\" × 13'0\"",
+  "34'3\" × 13'0\"",
+  "34'3\" × 13'0\"",
+  "34'3\" × 13'0\"",
+  "34'3\" × 13'0\"",
+  "34'3\" × 13'0\"",
   "34'3\" × 13'0\"",
   "34'3\" × 14'0\"",
   "34'3\" × 17'3\"",
   "30'9\" × 13'0\"",
   "28'0\" × 13'0\"",
   "23'0\" × 13'0\"",
+  "34'3\" × 13'0\"",
+  "34'3\" × 13'0\"",
+  "34'3\" × 14'0\"",
   "34'3\" × 21'0\"",
 ];
 
@@ -36,16 +49,26 @@ const upperFloorDimensions = [
   "33'3\" × 13'0\"",
   "29'0\" × 13'0\"",
   "26'3\" × 13'0\"",
+  "26'3\" × 13'0\"",
+  "30'3\" × 13'0\"",
   "30'3\" × 13'0\"",
   "26'3\" × 14'0\"",
   "26'3\" × 17'3\"",
   "24'9\" × 13'0\"",
   "20'0\" × 13'0\"",
+  "20'0\" × 13'0\"",
+  "30'3\" × 13'0\"",
+  "30'3\" × 13'0\"",
   "30'3\" × 14'0\"",
   "30'3\" × 21'0\"",
   "36'3\" × 14'0\"",
   "44'3\" × 14'0\"",
   "36'3\" × 14'3\"",
+  "36'3\" × 13'0\"",
+  "36'3\" × 13'0\"",
+  "36'3\" × 13'0\"",
+  "30'3\" × 13'0\"",
+  "30'3\" × 13'0\"",
 ];
 
 export default function SpacesPage() {
@@ -92,15 +115,15 @@ export default function SpacesPage() {
         </div>
       </section>
 
-      {/* First & Second Floor */}
+      {/* First Floor */}
       <section className="bg-surface-dark py-20 text-white sm:py-28">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-2xl text-center">
             <p className="text-sm font-semibold uppercase tracking-wider text-gold">
-              First &amp; Second Floor
+              First Floor
             </p>
             <h2 className="mt-3 text-3xl font-semibold tracking-tight text-white sm:text-4xl">
-              First &amp; Second Floor Shop Configurations
+              First Floor Shop Configurations
             </h2>
           </div>
 
@@ -109,6 +132,28 @@ export default function SpacesPage() {
           </div>
 
           <p className="mt-10 text-sm text-white/60">
+            Illustrative shop configurations shown in the architectural plan.
+          </p>
+        </div>
+      </section>
+
+      {/* Second Floor */}
+      <section className="bg-background py-20 text-foreground sm:py-28">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-2xl text-center">
+            <p className="text-sm font-semibold uppercase tracking-wider text-gold">
+              Second Floor
+            </p>
+            <h2 className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">
+              Second Floor Shop Configurations
+            </h2>
+          </div>
+
+          <div className="mt-14">
+            <ShopGrid dimensions={upperFloorDimensions} />
+          </div>
+
+          <p className="mt-10 text-sm text-muted-foreground">
             Illustrative shop configurations shown in the architectural plan.
           </p>
         </div>

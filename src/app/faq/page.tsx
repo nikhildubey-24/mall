@@ -52,7 +52,7 @@ const faqs = [
   {
     question: "Where is the project located?",
     answer:
-      "The project is situated at P.H.N. 33, Village Chantidih, Tehsil Bilaspur, Chhattisgarh — close to Chantidih Road. Visit our location page to see the exact site position and surrounding connectivity.",
+      "The project is situated at Near Ashok Nagar Chowk, Chatidih Road, Bilaspur, Chhattisgarh. Visit our location page to see the exact site position and surrounding connectivity.",
     link: { label: "View location details", href: "/location" },
   },
   {

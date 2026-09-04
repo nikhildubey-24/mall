@@ -13,7 +13,7 @@ const NAV_ITEMS = [
   { label: "Contact", href: "/contact" },
 ] as const
 
-const ADDRESS = "P.H.N. 33, Village Chantidih, Tehsil Bilaspur, Chhattisgarh"
+const ADDRESS = "Near Ashok Nagar Chowk, Chatidih Road, Bilaspur, Chhattisgarh"
 const RERA_NUMBER = "CG-RERA Registration No.: PCGRERA030826002133"
 const RERA_VERIFY_URL = "https://rera.cgstate.gov.in"
 const PROMOTER = "YUVRAJ ENTERPRISES"

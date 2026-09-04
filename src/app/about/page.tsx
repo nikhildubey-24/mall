@@ -3,7 +3,13 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
-import { ShieldCheck, MapPin, ExternalLink, ArrowRight } from "lucide-react";
+import {
+  ShieldCheck,
+  MapPin,
+  ExternalLink,
+  ArrowRight,
+  UserRound,
+} from "lucide-react";
 import { BASE_URL } from "@/lib/seo";
 
 export const metadata: Metadata = {
@@ -28,12 +34,41 @@ const quickFacts = [
     value: "H-2/75, Ring Road, Narmada Nagar, Bilaspur, Chhattisgarh",
   },
   {
+    label: "Constructed Area",
+    value: "≈ 2,25,000 sq ft",
+  },
+  {
     label: "Location",
-    value: "P.H.N. 33, Village Chantidih, Tehsil Bilaspur, Chhattisgarh",
+    value: "Near Ashok Nagar Chowk, Chatidih Road, Bilaspur, Chhattisgarh",
   },
   {
     label: "RERA Registered",
     value: "PCGRERA030826002133",
+  },
+];
+
+const directors = [
+  {
+    name: "Mr. Santosh Gupta",
+    role: "Director",
+    image: "/images/SantoshGupta.jpeg",
+    width: 1068,
+    height: 1600,
+  },
+  {
+    name: "Mr. Sahil Gupta",
+    role: "Director",
+    image: "/images/sahilgupta.jpeg",
+    width: 413,
+    height: 531,
+  },
+  {
+    name: "Mrs. Sudha Gupta",
+    role: "Director",
+    image: "/images/sudhagupta.jpeg",
+    width: 413,
+    height: 531,
+    note: "Vice President, Bhartiya Janta Party, Bilaspur, Chhattisgarh",
   },
 ];
 
@@ -164,6 +199,57 @@ export default function AboutPage() {
                 <ExternalLink className="size-4" aria-hidden="true" />
               </a>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Directors */}
+      <section className="bg-surface-dark text-white">
+        <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-24 lg:px-8">
+          <div className="mx-auto max-w-2xl text-center">
+            <p className="text-sm font-semibold uppercase tracking-wider text-gold">
+              Leadership
+            </p>
+            <h2 className="mt-3 text-3xl font-semibold tracking-tight text-white sm:text-4xl">
+              Our Directors
+            </h2>
+            <p className="mt-4 text-white/70">
+              The vision and dedication behind Acropolis The Mall.
+            </p>
+          </div>
+
+          <div className="mx-auto mt-12 grid max-w-5xl grid-cols-1 gap-8 sm:grid-cols-3">
+            {directors.map((director) => (
+              <div
+                key={director.name}
+                className="group overflow-hidden rounded-2xl border border-border bg-surface-card shadow-premium-lg"
+              >
+                <div className="relative aspect-[3/4] w-full overflow-hidden bg-muted">
+                  <Image
+                    src={director.image}
+                    alt={director.name}
+                    width={director.width}
+                    height={director.height}
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 33vw, 25vw"
+                    className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+                  />
+                </div>
+                <div className="p-6 text-center">
+                  <h3 className="text-lg font-semibold text-white">
+                    {director.name}
+                  </h3>
+                  <p className="mt-1 flex items-center justify-center gap-1.5 text-sm text-gold">
+                    <UserRound className="size-4" aria-hidden="true" />
+                    {director.role}
+                  </p>
+                  {"note" in director && director.note ? (
+                    <p className="mt-3 text-xs leading-relaxed text-white/60">
+                      {director.note}
+                    </p>
+                  ) : null}
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>

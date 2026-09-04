@@ -108,7 +108,7 @@ async function main() {
     { key: 'address', value: 'P.H.N. 33, Village Chantidih, Tehsil Bilaspur, Chhattisgarh' },
     { key: 'promoter', value: 'YUVRAJ ENTERPRISES' },
     { key: 'registered_office', value: 'H-2/75, Ring Road, Narmada Nagar, Bilaspur, Chhattisgarh' },
-    { key: 'map_url', value: '' },
+    { key: 'map_url', value: 'https://maps.google.com/maps?q=22.0947208%2C82.1596756&t=m&z=17&output=embed&iwloc=near' },
     { key: 'logo', value: '' },
     { key: 'favicon', value: '' },
   ];

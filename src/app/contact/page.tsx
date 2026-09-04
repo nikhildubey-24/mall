@@ -28,7 +28,7 @@ export const metadata: Metadata = {
 };
 
 const PROJECT_ADDRESS =
-  "P.H.N. 33, Village Chantidih, Tehsil Bilaspur, Chhattisgarh";
+  "Near Ashok Nagar Chowk, Chatidih Road, Bilaspur, Chhattisgarh";
 const LOCATION = "Chantidih Road, Bilaspur";
 const PROMOTER = "YUVRAJ ENTERPRISES";
 const REGISTERED_OFFICE =

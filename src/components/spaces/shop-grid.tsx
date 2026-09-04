@@ -15,9 +15,9 @@ export function ShopGrid({
 
   return (
     <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
-      {dimensions.map((dimension) => (
+      {dimensions.map((dimension, index) => (
         <div
-          key={dimension}
+          key={`${label}-${index}`}
           className={
             isDark
               ? "flex flex-col gap-4 rounded-xl border border-gold/20 bg-surface-card p-5 shadow-premium-sm transition-shadow duration-300 hover:shadow-premium-lg"
@@ -41,7 +41,7 @@ export function ShopGrid({
                   : "text-sm font-semibold uppercase tracking-wider text-gold-muted-foreground"
               }
             >
-              {label}
+              {label} {index + 1}
             </span>
           </div>
           <span

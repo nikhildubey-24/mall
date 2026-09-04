@@ -58,6 +58,18 @@ export function ProjectIntro() {
                   </p>
                 </div>
               </div>
+
+              {/* Construction area highlight */}
+              <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2">
+                <div className="rounded-xl border border-gold/30 bg-gold-subtle p-5">
+                  <p className="text-3xl font-bold text-gold-foreground">
+                    2,25,000<span className="text-lg font-semibold"> sq ft</span>
+                  </p>
+                  <p className="mt-1 text-sm font-medium text-gold-foreground">
+                    Construction Area (approx.)
+                  </p>
+                </div>
+              </div>
             </div>
           </AnimatedSection>
 
