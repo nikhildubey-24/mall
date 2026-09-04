@@ -29,17 +29,10 @@ const floors: FloorPlan[] = [
   },
   {
     id: "first",
-    name: "First Floor",
+    name: "First & Second Floor",
     description:
-      "First floor layout with commercial shops, lifts, toilets and open terrace sitting area.",
-    image: "/images/floor-plans/first-floor.png",
-  },
-  {
-    id: "second",
-    name: "Second Floor",
-    description:
-      "Second floor layout with open terrace sitting area measuring 70' × 18'.",
-    image: "/images/floor-plans/second-floor.png",
+      "First and second floor layout with commercial shops, lifts, toilets and open terrace sitting area.",
+    image: "/images/floor-plans/first-second.png",
   },
 ];
 

@@ -89,8 +89,8 @@ async function main() {
   const galleryItems = [
     { id: 'gallery-1', category: 'Project', title: 'Acropolis The Mall – Project View', imageUrl: '/images/hero_section.png', altText: 'View of the Acropolis The Mall project', sortOrder: 1 },
     { id: 'gallery-2', category: 'Floor Plans', title: 'Ground Floor Plan', imageUrl: '/images/floor-plans/ground-floor.png', altText: 'Architectural ground floor plan', sortOrder: 1 },
-    { id: 'gallery-3', category: 'Floor Plans', title: 'First Floor Plan', imageUrl: '/images/floor-plans/first-floor.png', altText: 'Architectural first floor plan', sortOrder: 2 },
-    { id: 'gallery-4', category: 'Floor Plans', title: 'Second Floor Plan', imageUrl: '/images/floor-plans/second-floor.png', altText: 'Architectural second floor plan', sortOrder: 3 },
+    { id: 'gallery-3', category: 'Floor Plans', title: 'First & Second Floor Plan', imageUrl: '/images/floor-plans/first-second.png', altText: 'Architectural first and second floor plan', sortOrder: 2 },
+    { id: 'gallery-4', category: 'Floor Plans', title: 'First & Second Floor Plan', imageUrl: '/images/floor-plans/first-second.png', altText: 'Architectural first and second floor plan', sortOrder: 3 },
   ];
   for (const item of galleryItems) {
     await prisma.galleryImage.upsert({
