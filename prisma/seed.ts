@@ -88,9 +88,7 @@ async function main() {
   // Gallery images
   const galleryItems = [
     { id: 'gallery-1', category: 'Project', title: 'Acropolis The Mall – Project View', imageUrl: '/images/hero_section.png', altText: 'View of the Acropolis The Mall project', sortOrder: 1 },
-    { id: 'gallery-2', category: 'Floor Plans', title: 'Ground Floor Plan', imageUrl: '/images/floor-plans/ground-floor.png', altText: 'Architectural ground floor plan', sortOrder: 1 },
-    { id: 'gallery-3', category: 'Floor Plans', title: 'First & Second Floor Plan', imageUrl: '/images/floor-plans/first-second.png', altText: 'Architectural first and second floor plan', sortOrder: 2 },
-    { id: 'gallery-4', category: 'Floor Plans', title: 'First & Second Floor Plan', imageUrl: '/images/floor-plans/first-second.png', altText: 'Architectural first and second floor plan', sortOrder: 3 },
+    { id: 'gallery-2', category: 'Floor Plans', title: 'Ground Floor Plan', imageUrl: '/images/floor-plans/ground-floor.png', altText: 'Architectural ground floor plan', sortOrder: 2 },
   ];
   for (const item of galleryItems) {
     await prisma.galleryImage.upsert({
@@ -104,7 +102,7 @@ async function main() {
   const settings = [
     { key: 'phone', value: '' },
     { key: 'whatsapp', value: '' },
-    { key: 'email', value: '' },
+    { key: 'email', value: 'acropolismallg@gmail.com' },
     { key: 'address', value: 'P.H.N. 33, Village Chantidih, Tehsil Bilaspur, Chhattisgarh' },
     { key: 'promoter', value: 'YUVRAJ ENTERPRISES' },
     { key: 'registered_office', value: 'H-2/75, Ring Road, Narmada Nagar, Bilaspur, Chhattisgarh' },

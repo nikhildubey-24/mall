@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import {
   ShieldCheck,
   MapPin,
@@ -50,25 +51,28 @@ const quickFacts = [
 const directors = [
   {
     name: "Mr. Santosh Gupta",
-    role: "Director",
+    role: "CEO, Gupta Group",
     image: "/images/SantoshGupta.jpeg",
     width: 1068,
     height: 1600,
-  },
-  {
-    name: "Mr. Sahil Gupta",
-    role: "Director",
-    image: "/images/sahilgupta.jpeg",
-    width: 413,
-    height: 531,
+    badge: "",
   },
   {
     name: "Mrs. Sudha Gupta",
-    role: "Director",
+    role: "Director 1",
     image: "/images/sudhagupta.jpeg",
     width: 413,
     height: 531,
     note: "Vice President, Bhartiya Janta Party, Bilaspur, Chhattisgarh",
+    badge: "Director 1",
+  },
+  {
+    name: "Mr. Sahil Gupta",
+    role: "Director 2, Young Entrepreneur",
+    image: "/images/sahilgupta.jpeg",
+    width: 413,
+    height: 531,
+    badge: "Director 2",
   },
 ];
 
@@ -233,6 +237,11 @@ export default function AboutPage() {
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 33vw, 25vw"
                     className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
                   />
+                  {director.badge ? (
+                    <Badge className="absolute left-3 top-3 border-gold/50 bg-black/60 px-2.5 py-1 text-xs font-semibold uppercase tracking-wider text-gold backdrop-blur-sm">
+                      {director.badge}
+                    </Badge>
+                  ) : null}
                 </div>
                 <div className="p-6 text-center">
                   <h3 className="text-lg font-semibold text-white">
@@ -243,7 +252,7 @@ export default function AboutPage() {
                     {director.role}
                   </p>
                   {"note" in director && director.note ? (
-                    <p className="mt-3 text-xs leading-relaxed text-white/60">
+                    <p className="mt-3 text-sm leading-relaxed text-gold">
                       {director.note}
                     </p>
                   ) : null}

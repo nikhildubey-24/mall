@@ -11,7 +11,7 @@ export function Header() {
   const pathname = usePathname()
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/60 bg-background/80 backdrop-blur-md supports-[backdrop-filter]:bg-background/60">
+    <header className="sticky top-0 z-50 w-full border-b border-white/10 bg-background/60 backdrop-blur-xl supports-[backdrop-filter]:bg-background/40 shadow-[0_1px_0_0_rgba(255,255,255,0.05)]">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         {/* Logo */}
         <Link
@@ -19,12 +19,14 @@ export function Header() {
           className="flex items-center gap-2 text-xl font-semibold tracking-widest transition-opacity hover:opacity-80"
         >
           <span className="text-gold">◆</span>
-          ACROPOLIS
+          <span className="bg-gradient-to-r from-gold to-gold/70 bg-clip-text text-transparent">
+            ACROPOLIS
+          </span>
         </Link>
 
         {/* Desktop nav - center */}
         <nav
-          className="hidden items-center gap-6 md:flex"
+          className="hidden items-center gap-1 md:flex"
           aria-label="Primary"
         >
           {NAV_ITEMS.map((item) => {
@@ -34,11 +36,16 @@ export function Header() {
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  "text-sm font-medium transition-colors hover:text-gold",
-                  active ? "text-gold" : "text-foreground/80"
+                  "relative rounded-md px-3 py-2 text-sm font-medium transition-all duration-200",
+                  active
+                    ? "text-gold bg-gold/10"
+                    : "text-foreground/70 hover:text-gold hover:bg-white/5"
                 )}
               >
                 {item.label}
+                {active && (
+                  <span className="absolute inset-x-1 -bottom-[1px] h-0.5 rounded-full bg-gold" />
+                )}
               </Link>
             )
           })}
@@ -46,7 +53,7 @@ export function Header() {
 
         {/* Desktop CTA - right */}
         <div className="hidden md:block">
-          <Button asChild className="bg-gold text-gold-foreground hover:bg-gold/90">
+          <Button asChild className="bg-gold text-gold-foreground hover:bg-gold/90 shadow-[0_0_12px_rgba(212,175,55,0.25)]">
             <Link href="/enquiry">Enquire Now</Link>
           </Button>
         </div>

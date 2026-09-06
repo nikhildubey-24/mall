@@ -90,9 +90,10 @@ export function MobileNav() {
           </svg>
         </Button>
       </SheetTrigger>
-      <SheetContent side="right" className="w-72 sm:max-w-sm">
+      <SheetContent side="right" className="w-72 sm:max-w-sm border-white/10 bg-background/80 backdrop-blur-xl">
         <SheetHeader>
-          <SheetTitle className="text-gold tracking-widest text-lg">
+          <SheetTitle className="text-gold tracking-widest text-lg flex items-center gap-2">
+            <span className="text-gold">◆</span>
             ACROPOLIS
           </SheetTitle>
         </SheetHeader>

@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 
 import { prisma } from "@/lib/prisma";
+import { sendEnquiryEmail } from "@/lib/mailer";
 import { enquirySchema } from "@/components/enquiry/enquiry-schema";
 
 export const runtime = "nodejs";
@@ -93,6 +94,12 @@ export async function POST(request: Request) {
         message: data.message?.trim() || null,
       },
     });
+
+    try {
+      await sendEnquiryEmail(data);
+    } catch (error) {
+      console.error("Failed to send enquiry email:", error);
+    }
 
     return NextResponse.json({ success: true, id: enquiry.id }, { status: 201 });
   } catch (error) {
