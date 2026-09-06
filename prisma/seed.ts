@@ -51,18 +51,21 @@ async function main() {
   // Floor plans
   const floors = [
     { floorName: 'ground', title: 'Ground Floor Plan', description: 'Ground floor layout with commercial shops, entrance foyer, basement ramp access, open restaurant area and recreational/play area.' },
-    { floorName: 'first', title: 'First Floor Plan', description: 'First floor layout with commercial shops, lifts, toilets and open terrace sitting area.' },
-    { floorName: 'second', title: 'Second Floor Plan', description: 'Second floor layout with commercial shops, lifts, toilets and open terrace sitting area measuring 70\' × 18\'.' },
+    { floorName: 'firstsecond', title: 'First & Second Floor Plan', description: 'First and second floor layout with commercial shops, lifts, toilets and open terrace sitting area.' },
   ];
   for (const floor of floors) {
+    const image =
+      floor.floorName === 'firstsecond'
+        ? '/images/floor-plans/first-second.png'
+        : `/images/floor-plans/${floor.floorName}-floor.png`;
     await prisma.floorPlan.upsert({
       where: { id: `floor-${floor.floorName}` },
-      update: {},
+      update: { title: floor.title, description: floor.description, image },
       create: {
         id: `floor-${floor.floorName}`,
         projectId: project.id,
         ...floor,
-        image: `/images/floor-plans/${floor.floorName}-floor.png`,
+        image,
       },
     });
   }
@@ -89,6 +92,7 @@ async function main() {
   const galleryItems = [
     { id: 'gallery-1', category: 'Project', title: 'Acropolis The Mall – Project View', imageUrl: '/images/hero_section.png', altText: 'View of the Acropolis The Mall project', sortOrder: 1 },
     { id: 'gallery-2', category: 'Floor Plans', title: 'Ground Floor Plan', imageUrl: '/images/floor-plans/ground-floor.png', altText: 'Architectural ground floor plan', sortOrder: 2 },
+    { id: 'gallery-3', category: 'Floor Plans', title: 'First & Second Floor Plan', imageUrl: '/images/floor-plans/first-second.png', altText: 'Architectural first and second floor plan', sortOrder: 3 },
   ];
   for (const item of galleryItems) {
     await prisma.galleryImage.upsert({
